@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .progress-container {
+      width: 300px;
+      height: 20px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background-color: #4CAF50;
+    }
+
+    .progress-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-container" id="progress-container1">
+  <div class="progress-bar" id="progress-bar1"></div>
+  <div class="progress-text" id="progress-text1">0%</div>
+</div>
+
+<div class="progress-container" id="progress-container2">
+  <div class="progress-bar" id="progress-bar2"></div>
+  <div class="progress-text" id="progress-text2">0%</div>
+</div>
+
+<script>
+  function updateProgressBar(containerId, value) {
+    var progressBar = document.getElementById(containerId).querySelector('.progress-bar');
+    var progressText = document.getElementById(containerId).querySelector('.progress-text');
+
+    progressBar.style.width = value * 100 + '%';
+    progressText.textContent = Math.round(value * 100) + ' %';
+  }
+
+  function simulateProgressBar(containerId, targetValue) {
+    var value = 0;
+    var interval = setInterval(function() {
+      value += 0.01;
+      updateProgressBar(containerId, value);
+
+      if (value >= targetValue) {
+        clearInterval(interval);
+      }
+    }, 50);
+  }
+
+  // Simulate progress for the first progress bar (id="progress-container1")
+  simulateProgressBar('progress-container1', 0.9);
+
+  // Simulate progress for the second progress bar (id="progress-container2")
+  simulateProgressBar('progress-container2', 0.75);
+</script>
+
+</body>
+</html>
